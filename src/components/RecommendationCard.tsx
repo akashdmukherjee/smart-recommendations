@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { TrendingUp, CheckCircle, Target, Clock, Users, Music, Heart, Mic, HandHeart, BarChart2, Sparkles } from 'lucide-react';
 import { Badge } from './ui/badge';
@@ -13,7 +12,7 @@ interface RecommendationCardProps {
     goal: string;
     metrics: Record<string, string>;
     timeframe: 'short-term' | 'long-term';
-    categories: ('social media' | 'release management' | 'fan engagement' | 'live performance' | 'collaboration opportunities' | 'growth levers' | 'content optimization')[];
+    categories: readonly ('social media' | 'release management' | 'fan engagement' | 'live performance' | 'collaboration opportunities' | 'growth levers' | 'content optimization')[];
   };
 }
 
