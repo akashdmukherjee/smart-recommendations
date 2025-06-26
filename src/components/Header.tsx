@@ -7,7 +7,6 @@ export const Header = () => {
       <h1 className="text-4xl font-bold mb-2" style={{ color: '#0EB0C6' }}>
         Elijah Woods
       </h1>
-      <p className="text-xl text-gray-700 mb-2">Smart Growth Recommendations</p>
       <div className="flex justify-center space-x-6 text-sm text-gray-600">
         <span>📊 102k Monthly Listeners</span>
         <span>👥 69k Spotify Followers</span>
