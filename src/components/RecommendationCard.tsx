@@ -27,9 +27,9 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
 
   const getProgressColor = () => {
     const progress = getProgressValue();
-    if (progress >= 70) return 'bg-green-500';
-    if (progress >= 40) return 'bg-yellow-500';
-    return 'bg-orange-500';
+    if (progress >= 70) return 'bg-green-400';
+    if (progress >= 40) return 'bg-yellow-400';
+    return 'bg-orange-400';
   };
 
   return (
@@ -50,7 +50,7 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
             </div>
             <div className="relative h-2 w-full overflow-hidden rounded-full bg-gray-200">
               <div 
-                className={`h-full transition-all ${getProgressColor()}`}
+                className={`h-full transition-all duration-300 ${getProgressColor()}`}
                 style={{ width: `${getProgressValue()}%` }}
               />
             </div>
