@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TrendingUp, Target, Clock, Users, Music, Heart, Mic, HandHeart, BarChart2, Sparkles, ChevronDown, Lightbulb, ArrowLeft, ArrowRight } from 'lucide-react';
+import { TrendingUp, Target, Clock, Users, Music, Heart, Mic, HandHeart, BarChart2, Sparkles, ChevronDown, Lightbulb, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
@@ -45,9 +45,20 @@ const getCategoryLabel = (category: string) => {
 
 export const LongTermRecommendationCard = ({ recommendation }: LongTermRecommendationCardProps) => {
   const [currentPairIndex, setCurrentPairIndex] = useState(0);
+  const [completedActions, setCompletedActions] = useState<Set<number>>(new Set());
   
   const currentPair = recommendation.actionInsightPairs[currentPairIndex];
   const totalPairs = recommendation.actionInsightPairs.length;
+
+  const toggleActionComplete = (index: number) => {
+    const newCompleted = new Set(completedActions);
+    if (newCompleted.has(index)) {
+      newCompleted.delete(index);
+    } else {
+      newCompleted.add(index);
+    }
+    setCompletedActions(newCompleted);
+  };
 
   const goToPrevious = () => {
     setCurrentPairIndex(prev => 
@@ -148,11 +159,26 @@ export const LongTermRecommendationCard = ({ recommendation }: LongTermRecommend
             
             {/* Recommendation section */}
             <div className="bg-blue-50 rounded-lg p-4">
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-3">
                 <Lightbulb size={16} className="text-blue-600" />
-                <h4 className="text-sm font-semibold text-gray-900">Recommendation</h4>
+                <h4 className="text-sm font-semibold text-gray-900">Recommended Action</h4>
               </div>
-              <p className="text-sm text-gray-700 leading-relaxed">{currentPair.action}</p>
+              {/* Action section with circle button */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => toggleActionComplete(currentPairIndex)}
+                  className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
+                    completedActions.has(currentPairIndex)
+                      ? 'bg-green-500 border-green-500 text-white' 
+                      : 'border-gray-300 hover:border-green-400'
+                  }`}
+                >
+                  {completedActions.has(currentPairIndex) && <CheckCircle size={14} />}
+                </button>
+                <p className="text-sm text-gray-700 flex-1 leading-6">
+                  {currentPair.action}
+                </p>
+              </div>
             </div>
           </div>
 
