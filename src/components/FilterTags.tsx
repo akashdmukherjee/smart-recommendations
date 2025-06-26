@@ -63,18 +63,18 @@ export const FilterTags = ({
   ];
 
   return (
-    <div className="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
+    <div className="mb-8 p-6 bg-white rounded-lg shadow-sm border border-gray-200">
       {/* Timeframe filters */}
       <div className="mb-6">
         <h3 className="text-sm font-semibold text-gray-700 mb-3">Timeframe</h3>
-        <ToggleGroup type="multiple" value={selectedTimeframes} onValueChange={onTimeframeChange} className="justify-start gap-3">
+        <ToggleGroup type="multiple" value={selectedTimeframes} onValueChange={onTimeframeChange} className="justify-start gap-2">
           {timeframes.map((timeframe) => (
             <ToggleGroupItem
               key={timeframe}
               value={timeframe}
               variant="outline"
               size="default"
-              className="flex items-center gap-2 px-4 py-2 bg-white border-gray-300 text-gray-700 data-[state=on]:bg-blue-600 data-[state=on]:text-white data-[state=on]:border-blue-600 hover:bg-gray-100 data-[state=on]:hover:bg-blue-700"
+              className="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 rounded-md bg-white text-gray-700 hover:bg-gray-50 data-[state=on]:bg-gray-100 data-[state=on]:text-gray-900 data-[state=on]:border-gray-300"
             >
               {getTimeframeIcon(timeframe)}
               {getTimeframeLabel(timeframe)}
@@ -86,14 +86,14 @@ export const FilterTags = ({
       {/* Category filters */}
       <div>
         <h3 className="text-sm font-semibold text-gray-700 mb-3">Categories</h3>
-        <ToggleGroup type="multiple" value={selectedCategories} onValueChange={onCategoryChange} className="justify-start flex-wrap gap-3">
+        <ToggleGroup type="multiple" value={selectedCategories} onValueChange={onCategoryChange} className="justify-start flex-wrap gap-2">
           {categories.map((category) => (
             <ToggleGroupItem
               key={category}
               value={category}
               variant="outline"
               size="default"
-              className="flex items-center gap-2 px-4 py-2 bg-white border-gray-300 text-gray-700 data-[state=on]:bg-blue-600 data-[state=on]:text-white data-[state=on]:border-blue-600 hover:bg-gray-100 data-[state=on]:hover:bg-blue-700"
+              className="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 rounded-md bg-white text-gray-700 hover:bg-gray-50 data-[state=on]:bg-gray-100 data-[state=on]:text-gray-900 data-[state=on]:border-gray-300"
             >
               {getCategoryIcon(category)}
               {getCategoryLabel(category)}
