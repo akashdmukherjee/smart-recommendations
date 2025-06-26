@@ -25,19 +25,15 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
     return isCompleted ? 100 : Math.floor(Math.random() * 40) + 10;
   };
 
-  const getPriorityColor = () => {
-    switch (recommendation.priority) {
-      case '🟢': return 'bg-green-500';
-      case '🟡': return 'bg-yellow-500';
-      default: return 'bg-gray-500';
-    }
+  const getProgressColor = () => {
+    const progress = getProgressValue();
+    if (progress >= 70) return 'bg-green-500';
+    if (progress >= 40) return 'bg-yellow-500';
+    return 'bg-orange-500';
   };
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      {/* Priority indicator bar */}
-      <div className={`h-1 ${getPriorityColor()}`}></div>
-      
       <div className="p-6">
         {/* Goal section */}
         <div className="bg-gray-50 rounded-lg p-4 mb-4">
@@ -52,7 +48,12 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
               <span>Progress</span>
               <span>{getProgressValue()}%</span>
             </div>
-            <Progress value={getProgressValue()} className="h-2" />
+            <div className="relative h-2 w-full overflow-hidden rounded-full bg-gray-200">
+              <div 
+                className={`h-full transition-all ${getProgressColor()}`}
+                style={{ width: `${getProgressValue()}%` }}
+              />
+            </div>
           </div>
         </div>
         
