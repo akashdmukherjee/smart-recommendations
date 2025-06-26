@@ -30,8 +30,25 @@ const getCategoryIcon = (category: string) => {
   }
 };
 
+const getCategoryLabel = (category: string) => {
+  switch (category) {
+    case 'social media': return 'Social Media';
+    case 'release management': return 'Release Management';
+    case 'fan engagement': return 'Fan Engagement';
+    case 'live performance': return 'Live Performance';
+    case 'collaboration opportunities': return 'Collaboration';
+    case 'growth levers': return 'Growth Levers';
+    case 'content optimization': return 'Content Optimization';
+    default: return category;
+  }
+};
+
 const getTimeframeIcon = (timeframe: string) => {
   return timeframe === 'short-term' ? <Clock size={12} /> : <TrendingUp size={12} />;
+};
+
+const getTimeframeLabel = (timeframe: string) => {
+  return timeframe === 'short-term' ? 'Short-term' : 'Long-term';
 };
 
 export const RecommendationCard = ({ recommendation }: RecommendationCardProps) => {
@@ -56,14 +73,14 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
       <div className="p-6">
         {/* Tags section */}
         <div className="flex flex-wrap gap-2 mb-4">
-          <Badge variant="outline" className="flex items-center gap-1 text-xs">
+          <Badge variant="outline" className="flex items-center gap-1 text-xs font-normal">
             {getTimeframeIcon(recommendation.timeframe)}
-            {recommendation.timeframe}
+            {getTimeframeLabel(recommendation.timeframe)}
           </Badge>
           {recommendation.categories.map((category) => (
-            <Badge key={category} variant="secondary" className="flex items-center gap-1 text-xs">
+            <Badge key={category} variant="secondary" className="flex items-center gap-1 text-xs font-normal">
               {getCategoryIcon(category)}
-              {category}
+              {getCategoryLabel(category)}
             </Badge>
           ))}
         </div>
