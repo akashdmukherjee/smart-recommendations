@@ -1,6 +1,6 @@
-
 import React, { useState, useMemo } from 'react';
 import { RecommendationCard } from './RecommendationCard';
+import { LongTermRecommendationCard } from './LongTermRecommendationCard';
 import { FilterTags } from './FilterTags';
 
 export const ShortTermRecommendations = () => {
@@ -79,13 +79,71 @@ export const ShortTermRecommendations = () => {
     categories: ["content optimization", "social media"] as const
   }];
 
+  const longTermRecommendations = [{
+    id: 6,
+    title: "Increase Track Release Success",
+    goal: "To improve stream velocity, playlist pickup, and catalog longevity with each new release.",
+    timeframe: "long-term" as const,
+    categories: ["release management", "content optimization", "growth levers"] as const,
+    actionInsightPairs: [{
+      action: "Shape future tracks around Joyful + Nostalgic moods — use this as a creative filter during production.",
+      insight: "Your top-performing song (\"Echo Drift\") shares this emotional profile — and this mood cluster is currently trending in editorial placements and algorithmic playlists."
+    }, {
+      action: "Curate a public \"mood match\" playlist blending your catalog with mood-aligned songs from bigger artists.",
+      insight: "Mood association improves contextual relevance and playlist co-occurrence, which increases visibility in streaming algorithms."
+    }, {
+      action: "Carry mood consistency across visual branding — cover art, teaser videos, and promo copy.",
+      insight: "Emotionally consistent branding improves click-through and repeat listens, reinforcing track identity in crowded feeds."
+    }]
+  }, {
+    id: 7,
+    title: "Build High-Value Fanbases in Key Markets",
+    goal: "To strengthen local fan density that supports touring, merch drops, and long-term cultural relevance.",
+    timeframe: "long-term" as const,
+    categories: ["fan engagement", "social media", "live performance"] as const,
+    actionInsightPairs: [{
+      action: "Launch targeted ad campaigns (IG/TikTok) in LA, London, and Berlin aimed at 18–25 year olds.",
+      insight: "These cities already show above-average engagement and strong ad conversion rates — ideal for fanbase consolidation."
+    }, {
+      action: "Use city-specific visual cues and language in your creative to connect culturally.",
+      insight: "Local relevance improves watch time and saves, making your content more promotable in geo-driven algorithms."
+    }, {
+      action: "Retarget engaged fans (profile viewers, savers) with ads tied to new drops or exclusive offers.",
+      insight: "Warm audiences are significantly more likely to convert — ideal for merch, tickets, or pre-saves."
+    }, {
+      action: "Run A/B tests with ad content formats (hook-first vs lyric-first) to optimize creative performance by region.",
+      insight: "Cultural content preferences affect scroll-stop behavior — tuning for each market maximizes ROI."
+    }]
+  }, {
+    id: 8,
+    title: "Expand Global Reach Through High-Leverage Cities",
+    goal: "To unlock algorithmic and cultural ripple effects by growing in internationally influential music markets.",
+    timeframe: "long-term" as const,
+    categories: ["collaboration opportunities", "social media", "growth levers"] as const,
+    actionInsightPairs: [{
+      action: "Collaborate with emerging artists in trigger cities (e.g., Seoul, Mexico City, Berlin) for co-releases or remixes.",
+      insight: "Local collaborations are more likely to trigger regional playlisting and social sharing — which Spotify and TikTok often amplify."
+    }, {
+      action: "Post geotagged content with cultural references (e.g., visuals, language, scenes) tied to those cities.",
+      insight: "Localized content performs better with regional audiences and feeds into location-based discovery algorithms."
+    }, {
+      action: "Translate parts of your content — captions, lyrics, titles — into local languages.",
+      insight: "Multilingual content increases relatability and boosts engagement in LATAM and Asia."
+    }, {
+      action: "Engage local micro-curators (playlists, indie radio, creators) to seed momentum.",
+      insight: "These grassroots tastemakers can act as gateway nodes for bigger editorial and algorithmic lift."
+    }]
+  }];
+
+  const allRecommendations = [...recommendations, ...longTermRecommendations];
+
   const filteredRecommendations = useMemo(() => {
-    return recommendations.filter(rec => {
+    return allRecommendations.filter(rec => {
       const timeframeMatch = selectedTimeframes.length === 0 || selectedTimeframes.includes(rec.timeframe);
       const categoryMatch = selectedCategories.length === 0 || rec.categories.some(cat => selectedCategories.includes(cat));
       return timeframeMatch && categoryMatch;
     });
-  }, [selectedTimeframes, selectedCategories]);
+  }, [selectedTimeframes, selectedCategories, allRecommendations]);
 
   return (
     <div>
@@ -100,7 +158,11 @@ export const ShortTermRecommendations = () => {
       
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
         {filteredRecommendations.map(rec => (
-          <RecommendationCard key={rec.id} recommendation={rec} />
+          'actionInsightPairs' in rec ? (
+            <LongTermRecommendationCard key={rec.id} recommendation={rec} />
+          ) : (
+            <RecommendationCard key={rec.id} recommendation={rec} />
+          )
         ))}
       </div>
     </div>
