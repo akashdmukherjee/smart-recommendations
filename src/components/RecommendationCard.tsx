@@ -75,7 +75,7 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
           >
             {isCompleted && <CheckCircle size={14} />}
           </button>
-          <p className="text-base text-gray-700 flex-1 leading-6">
+          <p className="text-sm text-gray-700 flex-1 leading-6">
             {recommendation.action}
           </p>
         </div>
