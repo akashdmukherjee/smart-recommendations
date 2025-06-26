@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
-import { TrendingUp, CheckCircle, Target, Clock, Users, Music, Heart, Mic, HandHeart, BarChart2, Sparkles } from 'lucide-react';
+import { TrendingUp, CheckCircle, Target, Clock, Users, Music, Heart, Mic, HandHeart, BarChart2, Sparkles, ChevronDown } from 'lucide-react';
 import { Badge } from './ui/badge';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 interface RecommendationCardProps {
   recommendation: {
@@ -67,21 +69,43 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
     return 'bg-orange-400';
   };
 
+  const maxVisibleTags = 3;
+  const visibleCategories = recommendation.categories.slice(0, maxVisibleTags - 1); // -1 to account for timeframe tag
+  const remainingCategories = recommendation.categories.slice(maxVisibleTags - 1);
+
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="p-6">
         {/* Tags section */}
         <div className="flex flex-wrap gap-2 mb-4">
-          <Badge variant="outline" className="flex items-center gap-1 text-xs font-normal">
+          <Badge variant="secondary" className="flex items-center gap-1 text-xs font-normal">
             {getTimeframeIcon(recommendation.timeframe)}
             {getTimeframeLabel(recommendation.timeframe)}
           </Badge>
-          {recommendation.categories.map((category) => (
+          {visibleCategories.map((category) => (
             <Badge key={category} variant="secondary" className="flex items-center gap-1 text-xs font-normal">
               {getCategoryIcon(category)}
               {getCategoryLabel(category)}
             </Badge>
           ))}
+          {remainingCategories.length > 0 && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Badge variant="secondary" className="flex items-center gap-1 text-xs font-normal cursor-pointer hover:bg-gray-200">
+                  +{remainingCategories.length}
+                  <ChevronDown size={10} />
+                </Badge>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="z-50 bg-white border border-gray-200 shadow-lg">
+                {remainingCategories.map((category) => (
+                  <DropdownMenuItem key={category} className="flex items-center gap-2 text-xs">
+                    {getCategoryIcon(category)}
+                    {getCategoryLabel(category)}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
 
         {/* Goal section */}
