@@ -39,24 +39,21 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
       <div className={`h-1 ${getPriorityColor()}`}></div>
       
       <div className="p-6">
-        {/* Header - Action as title */}
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex-1 pr-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">
-              {recommendation.action}
-            </h3>
-          </div>
+        {/* Header with circle button and action text */}
+        <div className="flex items-start gap-3 mb-4">
           <button
             onClick={() => setIsCompleted(!isCompleted)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
+            className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
               isCompleted 
-                ? 'bg-green-50 text-green-700 border border-green-200' 
-                : 'bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100'
+                ? 'bg-green-500 border-green-500 text-white' 
+                : 'border-gray-300 hover:border-green-400'
             }`}
           >
-            {isCompleted ? <CheckCircle size={16} /> : <Circle size={16} />}
-            {isCompleted ? 'Completed' : 'Mark Done'}
+            {isCompleted && <CheckCircle size={14} />}
           </button>
+          <h3 className="text-lg font-semibold text-gray-900 flex-1">
+            {recommendation.action}
+          </h3>
         </div>
         
         {/* Content sections */}
