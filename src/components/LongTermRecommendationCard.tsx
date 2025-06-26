@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { TrendingUp, Target, Clock, Users, Music, Heart, Mic, HandHeart, BarChart2, Sparkles, ChevronDown, Lightbulb, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Badge } from './ui/badge';
@@ -62,19 +61,6 @@ export const LongTermRecommendationCard = ({ recommendation }: LongTermRecommend
     );
   };
 
-  // Progress logic for long-term goals (different from short-term)
-  const getProgressValue = () => {
-    // For long-term goals, progress is typically lower and based on different metrics
-    return Math.floor(Math.random() * 30) + 5; // 5-35% range for long-term goals
-  };
-
-  const getProgressColor = () => {
-    const progress = getProgressValue();
-    if (progress >= 25) return 'bg-green-400';
-    if (progress >= 15) return 'bg-yellow-400';
-    return 'bg-orange-400';
-  };
-
   const maxVisibleTags = 3;
   const visibleCategories = recommendation.categories.slice(0, maxVisibleTags - 1); // -1 to account for timeframe tag
   const remainingCategories = recommendation.categories.slice(maxVisibleTags - 1);
@@ -117,25 +103,11 @@ export const LongTermRecommendationCard = ({ recommendation }: LongTermRecommend
         {/* Title */}
         <h3 className="text-lg font-bold text-gray-900 mb-3">{recommendation.title}</h3>
 
-        {/* Goal section - matching short-term style */}
+        {/* Goal section - matching short-term style but without progress bar */}
         <div className="bg-gray-50 rounded-lg p-4 mb-4">
-          <div className="flex items-center gap-2 mb-3">
-            <Target size={16} className="text-gray-600" />
+          <div className="flex items-center gap-2">
+            <Target size={16} className="text-gray-600 flex-shrink-0" />
             <p className="text-base font-semibold text-gray-900">{recommendation.goal}</p>
-          </div>
-          
-          {/* Progress bar */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-xs text-gray-600">
-              <span>Progress</span>
-              <span>{getProgressValue()}%</span>
-            </div>
-            <div className="relative h-2 w-full overflow-hidden rounded-full bg-gray-200">
-              <div 
-                className={`h-full transition-all duration-500 ease-out ${getProgressColor()}`}
-                style={{ width: `${getProgressValue()}%` }}
-              />
-            </div>
           </div>
         </div>
         
