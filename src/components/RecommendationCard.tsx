@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { TrendingUp, CheckCircle, Circle, Target } from 'lucide-react';
-import { Progress } from './ui/progress';
+import { TrendingUp, CheckCircle, Target, Clock, Users, Music, Heart, Mic, HandHeart, BarChart2, Sparkles } from 'lucide-react';
+import { Badge } from './ui/badge';
 
 interface RecommendationCardProps {
   recommendation: {
@@ -12,8 +12,27 @@ interface RecommendationCardProps {
     why: string;
     goal: string;
     metrics: Record<string, string>;
+    timeframe: 'short-term' | 'long-term';
+    categories: ('social media' | 'release management' | 'fan engagement' | 'live performance' | 'collaboration opportunities' | 'growth levers' | 'content optimization')[];
   };
 }
+
+const getCategoryIcon = (category: string) => {
+  switch (category) {
+    case 'social media': return <Users size={12} />;
+    case 'release management': return <Music size={12} />;
+    case 'fan engagement': return <Heart size={12} />;
+    case 'live performance': return <Mic size={12} />;
+    case 'collaboration opportunities': return <HandHeart size={12} />;
+    case 'growth levers': return <BarChart2 size={12} />;
+    case 'content optimization': return <Sparkles size={12} />;
+    default: return <Target size={12} />;
+  }
+};
+
+const getTimeframeIcon = (timeframe: string) => {
+  return timeframe === 'short-term' ? <Clock size={12} /> : <TrendingUp size={12} />;
+};
 
 export const RecommendationCard = ({ recommendation }: RecommendationCardProps) => {
   const [isCompleted, setIsCompleted] = useState(false);
@@ -35,6 +54,20 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="p-6">
+        {/* Tags section */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <Badge variant="outline" className="flex items-center gap-1 text-xs">
+            {getTimeframeIcon(recommendation.timeframe)}
+            {recommendation.timeframe}
+          </Badge>
+          {recommendation.categories.map((category) => (
+            <Badge key={category} variant="secondary" className="flex items-center gap-1 text-xs">
+              {getCategoryIcon(category)}
+              {category}
+            </Badge>
+          ))}
+        </div>
+
         {/* Goal section */}
         <div className="bg-gray-50 rounded-lg p-4 mb-4">
           <div className="flex items-center gap-2 mb-3">
@@ -50,7 +83,7 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
             </div>
             <div className="relative h-2 w-full overflow-hidden rounded-full bg-gray-200">
               <div 
-                className={`h-full transition-all duration-300 ${getProgressColor()}`}
+                className={`h-full transition-all duration-500 ease-out ${getProgressColor()}`}
                 style={{ width: `${getProgressValue()}%` }}
               />
             </div>
