@@ -1,6 +1,12 @@
-import React from 'react';
+
+import React, { useState, useMemo } from 'react';
 import { RecommendationCard } from './RecommendationCard';
+import { FilterTags } from './FilterTags';
+
 export const ShortTermRecommendations = () => {
+  const [selectedTimeframes, setSelectedTimeframes] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
   const recommendations = [{
     id: 1,
     title: "Playlist Targeting Based on Affinity & Mood Matching",
@@ -72,10 +78,31 @@ export const ShortTermRecommendations = () => {
     timeframe: "short-term" as const,
     categories: ["content optimization", "social media"] as const
   }];
-  return <div>
+
+  const filteredRecommendations = useMemo(() => {
+    return recommendations.filter(rec => {
+      const timeframeMatch = selectedTimeframes.length === 0 || selectedTimeframes.includes(rec.timeframe);
+      const categoryMatch = selectedCategories.length === 0 || rec.categories.some(cat => selectedCategories.includes(cat));
+      return timeframeMatch && categoryMatch;
+    });
+  }, [selectedTimeframes, selectedCategories]);
+
+  return (
+    <div>
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">🎯 Growth Opportunities</h2>
+      
+      <FilterTags
+        selectedTimeframes={selectedTimeframes}
+        selectedCategories={selectedCategories}
+        onTimeframeChange={setSelectedTimeframes}
+        onCategoryChange={setSelectedCategories}
+      />
+      
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-        {recommendations.map(rec => <RecommendationCard key={rec.id} recommendation={rec} />)}
+        {filteredRecommendations.map(rec => (
+          <RecommendationCard key={rec.id} recommendation={rec} />
+        ))}
       </div>
-    </div>;
+    </div>
+  );
 };
