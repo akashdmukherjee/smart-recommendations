@@ -40,7 +40,7 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
       
       <div className="p-6">
         {/* Header with circle button and action text */}
-        <div className="flex items-start gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-4">
           <button
             onClick={() => setIsCompleted(!isCompleted)}
             className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
@@ -51,7 +51,7 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
           >
             {isCompleted && <CheckCircle size={14} />}
           </button>
-          <h3 className="text-lg font-semibold text-gray-900 flex-1">
+          <h3 className="text-lg font-semibold text-gray-900 flex-1 leading-6">
             {recommendation.action}
           </h3>
         </div>
