@@ -140,9 +140,9 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
         </div>
         
         {/* Recommendation section */}
-        <div className="mb-4">
+        <div className="bg-blue-50 rounded-lg p-4">
           <div className="flex items-center gap-2 mb-3">
-            <Lightbulb size={16} className="text-gray-600" />
+            <Lightbulb size={16} className="text-blue-600" />
             <h4 className="text-sm font-semibold text-gray-900">Recommendation</h4>
           </div>
           {/* Action section with circle button */}
