@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { RecommendationCard } from './RecommendationCard';
 import { LongTermRecommendationCard } from './LongTermRecommendationCard';
@@ -82,7 +83,7 @@ export const ShortTermRecommendations = () => {
   const longTermRecommendations = [{
     id: 6,
     title: "Increase Track Release Success",
-    goal: "To improve stream velocity, playlist pickup, and catalog longevity with each new release.",
+    goal: "Improve stream velocity and playlist pickup",
     timeframe: "long-term" as const,
     categories: ["release management", "content optimization", "growth levers"] as const,
     actionInsightPairs: [{
@@ -98,7 +99,7 @@ export const ShortTermRecommendations = () => {
   }, {
     id: 7,
     title: "Build High-Value Fanbases in Key Markets",
-    goal: "To strengthen local fan density that supports touring, merch drops, and long-term cultural relevance.",
+    goal: "Strengthen local fan density for touring support",
     timeframe: "long-term" as const,
     categories: ["fan engagement", "social media", "live performance"] as const,
     actionInsightPairs: [{
@@ -117,7 +118,7 @@ export const ShortTermRecommendations = () => {
   }, {
     id: 8,
     title: "Expand Global Reach Through High-Leverage Cities",
-    goal: "To unlock algorithmic and cultural ripple effects by growing in internationally influential music markets.",
+    goal: "Unlock global growth in key music markets",
     timeframe: "long-term" as const,
     categories: ["collaboration opportunities", "social media", "growth levers"] as const,
     actionInsightPairs: [{
