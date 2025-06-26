@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { TrendingUp, CheckCircle, Circle } from 'lucide-react';
+import { TrendingUp, CheckCircle, Circle, Target } from 'lucide-react';
 import { Progress } from './ui/progress';
 
 interface RecommendationCardProps {
@@ -41,8 +41,10 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
       <div className="p-6">
         {/* Goal section */}
         <div className="bg-gray-50 rounded-lg p-4 mb-4">
-          <h4 className="text-sm font-semibold text-gray-900 mb-2">Goal</h4>
-          <p className="text-base font-medium text-gray-900 mb-3">{recommendation.goal}</p>
+          <div className="flex items-center gap-2 mb-3">
+            <Target size={16} className="text-gray-600" />
+            <p className="text-base font-semibold text-gray-900">{recommendation.goal}</p>
+          </div>
           
           {/* Progress bar */}
           <div className="space-y-2">
