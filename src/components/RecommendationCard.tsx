@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Target, TrendingUp, CheckCircle, Circle } from 'lucide-react';
+import { TrendingUp, CheckCircle, Circle } from 'lucide-react';
 import { Progress } from './ui/progress';
 
 interface RecommendationCardProps {
@@ -39,11 +39,11 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
       <div className={`h-1 ${getPriorityColor()}`}></div>
       
       <div className="p-6">
-        {/* Header */}
+        {/* Header - Action as title */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1 pr-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {recommendation.title}
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              {recommendation.action}
             </h3>
           </div>
           <button
@@ -61,15 +61,7 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
         
         {/* Content sections */}
         <div className="space-y-4">
-          <div className="bg-gray-50 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Target size={16} className="text-blue-600" />
-              <h4 className="font-medium text-gray-900">Action</h4>
-            </div>
-            <p className="text-gray-700 text-sm leading-relaxed">{recommendation.action}</p>
-          </div>
-          
-          <div className="bg-gray-50 rounded-lg p-4">
+          <div className="bg-purple-50 rounded-lg p-4">
             <div className="flex items-center gap-2 mb-2">
               <TrendingUp size={16} className="text-purple-600" />
               <h4 className="font-medium text-gray-900">Why</h4>
@@ -78,10 +70,7 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
           </div>
           
           <div className="bg-gray-50 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Target size={16} style={{ color: '#0EB0C6' }} />
-              <h4 className="font-medium text-gray-900">Goal</h4>
-            </div>
+            <h4 className="font-medium text-gray-900 mb-3">Goal</h4>
             <p className="text-gray-700 text-sm leading-relaxed mb-3">{recommendation.goal}</p>
             
             {/* Progress bar */}
@@ -92,23 +81,6 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
               </div>
               <Progress value={getProgressValue()} className="h-2" />
             </div>
-          </div>
-          
-          {/* Metrics */}
-          <div className="flex flex-wrap gap-2 pt-2">
-            {Object.entries(recommendation.metrics).map(([key, value]) => (
-              <span 
-                key={key} 
-                className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border"
-                style={{ 
-                  backgroundColor: '#DCF5EC', 
-                  color: '#0EB0C6',
-                  borderColor: '#0EB0C6'
-                }}
-              >
-                {value}
-              </span>
-            ))}
           </div>
         </div>
       </div>
