@@ -100,10 +100,7 @@ export const LongTermRecommendationCard = ({ recommendation }: LongTermRecommend
           )}
         </div>
 
-        {/* Title */}
-        <h3 className="text-lg font-bold text-gray-900 mb-3">{recommendation.title}</h3>
-
-        {/* Goal section - matching short-term style but without progress bar */}
+        {/* Goal section - exactly matching short-term style but without progress bar */}
         <div className="bg-gray-50 rounded-lg p-4 mb-4">
           <div className="flex items-center gap-2">
             <Target size={16} className="text-gray-600 flex-shrink-0" />
