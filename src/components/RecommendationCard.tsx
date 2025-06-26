@@ -41,8 +41,8 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
       <div className="p-6">
         {/* Goal section */}
         <div className="bg-gray-50 rounded-lg p-4 mb-4">
-          <h4 className="font-medium text-gray-900 mb-3">Goal</h4>
-          <p className="text-gray-700 text-sm leading-relaxed mb-3">{recommendation.goal}</p>
+          <h4 className="font-semibold text-gray-900 mb-3">Goal</h4>
+          <p className="text-gray-700 text-sm leading-relaxed mb-3 font-medium">{recommendation.goal}</p>
           
           {/* Progress bar */}
           <div className="space-y-2">
@@ -75,9 +75,9 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
           >
             {isCompleted && <CheckCircle size={14} />}
           </button>
-          <h3 className="text-lg font-semibold text-gray-900 flex-1 leading-6">
+          <p className="text-gray-600 flex-1 leading-6">
             {recommendation.action}
-          </h3>
+          </p>
         </div>
       </div>
     </div>
