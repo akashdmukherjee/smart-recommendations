@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { TrendingUp, CheckCircle, Target, Clock, Users, Music, Heart, Mic, HandHeart, BarChart2, Sparkles, ChevronDown } from 'lucide-react';
+import { TrendingUp, CheckCircle, Target, Clock, Users, Music, Heart, Mic, HandHeart, BarChart2, Sparkles, ChevronDown, Lightbulb } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
@@ -139,21 +139,28 @@ export const RecommendationCard = ({ recommendation }: RecommendationCardProps) 
           <p className="text-sm text-gray-700 leading-relaxed">{recommendation.why}</p>
         </div>
         
-        {/* Action section with circle button */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setIsCompleted(!isCompleted)}
-            className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
-              isCompleted 
-                ? 'bg-green-500 border-green-500 text-white' 
-                : 'border-gray-300 hover:border-green-400'
-            }`}
-          >
-            {isCompleted && <CheckCircle size={14} />}
-          </button>
-          <p className="text-sm text-gray-700 flex-1 leading-6">
-            {recommendation.action}
-          </p>
+        {/* Recommendation section */}
+        <div className="mb-4">
+          <div className="flex items-center gap-2 mb-3">
+            <Lightbulb size={16} className="text-gray-600" />
+            <h4 className="text-sm font-semibold text-gray-900">Recommendation</h4>
+          </div>
+          {/* Action section with circle button */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsCompleted(!isCompleted)}
+              className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
+                isCompleted 
+                  ? 'bg-green-500 border-green-500 text-white' 
+                  : 'border-gray-300 hover:border-green-400'
+              }`}
+            >
+              {isCompleted && <CheckCircle size={14} />}
+            </button>
+            <p className="text-sm text-gray-700 flex-1 leading-6">
+              {recommendation.action}
+            </p>
+          </div>
         </div>
       </div>
     </div>
