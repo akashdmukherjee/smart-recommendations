@@ -13,19 +13,19 @@ interface FilterTagsProps {
 
 const getCategoryIcon = (category: string) => {
   switch (category) {
-    case 'social media': return <Users size={12} />;
-    case 'release management': return <Music size={12} />;
-    case 'fan engagement': return <Heart size={12} />;
-    case 'live performance': return <Mic size={12} />;
-    case 'collaboration opportunities': return <HandHeart size={12} />;
-    case 'growth levers': return <BarChart2 size={12} />;
-    case 'content optimization': return <Sparkles size={12} />;
+    case 'social media': return <Users size={14} />;
+    case 'release management': return <Music size={14} />;
+    case 'fan engagement': return <Heart size={14} />;
+    case 'live performance': return <Mic size={14} />;
+    case 'collaboration opportunities': return <HandHeart size={14} />;
+    case 'growth levers': return <BarChart2 size={14} />;
+    case 'content optimization': return <Sparkles size={14} />;
     default: return null;
   }
 };
 
 const getTimeframeIcon = (timeframe: string) => {
-  return timeframe === 'short-term' ? <Clock size={12} /> : <TrendingUp size={12} />;
+  return timeframe === 'short-term' ? <Clock size={14} /> : <TrendingUp size={14} />;
 };
 
 const getCategoryLabel = (category: string) => {
@@ -63,18 +63,18 @@ export const FilterTags = ({
   ];
 
   return (
-    <div className="mb-6 space-y-4">
+    <div className="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
       {/* Timeframe filters */}
-      <div>
-        <h3 className="text-sm font-medium text-gray-700 mb-2">Timeframe</h3>
-        <ToggleGroup type="multiple" value={selectedTimeframes} onValueChange={onTimeframeChange} className="justify-start">
+      <div className="mb-6">
+        <h3 className="text-sm font-semibold text-gray-700 mb-3">Timeframe</h3>
+        <ToggleGroup type="multiple" value={selectedTimeframes} onValueChange={onTimeframeChange} className="justify-start gap-3">
           {timeframes.map((timeframe) => (
             <ToggleGroupItem
               key={timeframe}
               value={timeframe}
               variant="outline"
-              size="sm"
-              className="flex items-center gap-1 data-[state=on]:bg-blue-100 data-[state=on]:text-blue-800 data-[state=on]:border-blue-300"
+              size="default"
+              className="flex items-center gap-2 px-4 py-2 bg-white border-gray-300 text-gray-700 data-[state=on]:bg-blue-600 data-[state=on]:text-white data-[state=on]:border-blue-600 hover:bg-gray-100 data-[state=on]:hover:bg-blue-700"
             >
               {getTimeframeIcon(timeframe)}
               {getTimeframeLabel(timeframe)}
@@ -85,15 +85,15 @@ export const FilterTags = ({
 
       {/* Category filters */}
       <div>
-        <h3 className="text-sm font-medium text-gray-700 mb-2">Categories</h3>
-        <ToggleGroup type="multiple" value={selectedCategories} onValueChange={onCategoryChange} className="justify-start flex-wrap">
+        <h3 className="text-sm font-semibold text-gray-700 mb-3">Categories</h3>
+        <ToggleGroup type="multiple" value={selectedCategories} onValueChange={onCategoryChange} className="justify-start flex-wrap gap-3">
           {categories.map((category) => (
             <ToggleGroupItem
               key={category}
               value={category}
               variant="outline"
-              size="sm"
-              className="flex items-center gap-1 data-[state=on]:bg-blue-100 data-[state=on]:text-blue-800 data-[state=on]:border-blue-300"
+              size="default"
+              className="flex items-center gap-2 px-4 py-2 bg-white border-gray-300 text-gray-700 data-[state=on]:bg-blue-600 data-[state=on]:text-white data-[state=on]:border-blue-600 hover:bg-gray-100 data-[state=on]:hover:bg-blue-700"
             >
               {getCategoryIcon(category)}
               {getCategoryLabel(category)}
