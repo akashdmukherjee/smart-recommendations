@@ -62,45 +62,55 @@ export const FilterTags = ({
     'content optimization'
   ];
 
+  const handleTimeframeToggle = (value: string) => {
+    if (selectedTimeframes.includes(value)) {
+      onTimeframeChange(selectedTimeframes.filter(t => t !== value));
+    } else {
+      onTimeframeChange([...selectedTimeframes, value]);
+    }
+  };
+
+  const handleCategoryToggle = (value: string) => {
+    if (selectedCategories.includes(value)) {
+      onCategoryChange(selectedCategories.filter(c => c !== value));
+    } else {
+      onCategoryChange([...selectedCategories, value]);
+    }
+  };
+
   return (
-    <div className="mb-8 p-6 bg-white rounded-lg shadow-sm border border-gray-200">
+    <div className="mb-8 flex flex-wrap gap-2">
       {/* Timeframe filters */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-gray-700 mb-3">Timeframe</h3>
-        <ToggleGroup type="multiple" value={selectedTimeframes} onValueChange={onTimeframeChange} className="justify-start gap-2">
-          {timeframes.map((timeframe) => (
-            <ToggleGroupItem
-              key={timeframe}
-              value={timeframe}
-              variant="outline"
-              size="default"
-              className="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 rounded-md bg-white text-gray-700 hover:bg-gray-50 data-[state=on]:bg-gray-100 data-[state=on]:text-gray-900 data-[state=on]:border-gray-300"
-            >
-              {getTimeframeIcon(timeframe)}
-              {getTimeframeLabel(timeframe)}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
-      </div>
+      {timeframes.map((timeframe) => (
+        <button
+          key={timeframe}
+          onClick={() => handleTimeframeToggle(timeframe)}
+          className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-white border transition-colors ${
+            selectedTimeframes.includes(timeframe)
+              ? 'border-gray-300 bg-gray-100 text-gray-900'
+              : 'border-gray-200 text-gray-700 hover:bg-gray-50'
+          }`}
+        >
+          {getTimeframeIcon(timeframe)}
+          {getTimeframeLabel(timeframe)}
+        </button>
+      ))}
 
       {/* Category filters */}
-      <div>
-        <h3 className="text-sm font-semibold text-gray-700 mb-3">Categories</h3>
-        <ToggleGroup type="multiple" value={selectedCategories} onValueChange={onCategoryChange} className="justify-start flex-wrap gap-2">
-          {categories.map((category) => (
-            <ToggleGroupItem
-              key={category}
-              value={category}
-              variant="outline"
-              size="default"
-              className="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 rounded-md bg-white text-gray-700 hover:bg-gray-50 data-[state=on]:bg-gray-100 data-[state=on]:text-gray-900 data-[state=on]:border-gray-300"
-            >
-              {getCategoryIcon(category)}
-              {getCategoryLabel(category)}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
-      </div>
+      {categories.map((category) => (
+        <button
+          key={category}
+          onClick={() => handleCategoryToggle(category)}
+          className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-white border transition-colors ${
+            selectedCategories.includes(category)
+              ? 'border-gray-300 bg-gray-100 text-gray-900'
+              : 'border-gray-200 text-gray-700 hover:bg-gray-50'
+          }`}
+        >
+          {getCategoryIcon(category)}
+          {getCategoryLabel(category)}
+        </button>
+      ))}
     </div>
   );
 };
